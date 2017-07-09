@@ -5,7 +5,7 @@ and it is accessible using REST API.
 import urllib3
 from bs4 import BeautifulSoup
 import json
-
+import time 
 # parse settings and information needed to access the server
 xmlfile = open('kbs.xml').read()
 soup = BeautifulSoup(xmlfile, 'lxml')
@@ -42,22 +42,25 @@ def items_number_from(id):
     resp = do_get('items_number_from', params)
     return int(resp)
 
-def items_from(req_id, nItems=1000):
+def items_from(start_id, nItems=1000):
     """
     returns the nItems items with id greater or equal to the given id.
     """
     counter = 0
-    c_id = req_id
-    final_resp = ""
+    c_id = start_id
+    final_resp = "["
     while counter < nItems:
         params = {'id' : c_id, 'key' : key}
         resp = do_get('items_from', params)
         ld = len(json.loads(resp))
-        final_resp += resp
+        final_resp += resp[1:-1] + ","
         counter += ld
         c_id = c_id + ld
+        print("{}/{}          ".format(counter, nItems), end='\r')
+        time.sleep(0.1)
     
-    return json.loads(final_resp)
+    return final_resp[:-1] + "]"
+    #return json.loads(final_resp)
 
 def add_item(dataEntry):
     """
