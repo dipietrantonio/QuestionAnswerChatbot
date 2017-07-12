@@ -4,3 +4,6 @@ BabelDomains_full/*
 kbs.xml
 full_kb.txt
 sample.txt
+tmp_*
+*.bin
+__pycache__/*

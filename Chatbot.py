@@ -3,6 +3,7 @@ In this module, the bot logic is implemented.
 """
 import telepot
 from DomainMapper import tell_domain, predef_domains
+from Brain import tell_relation
 
 # Define a list of names that are used to refer to the interaction state.
 S_READY = 0
@@ -53,12 +54,11 @@ class Chatbot(telepot.helper.ChatHandler):
             
             else:
 
+                relation = tell_relation(msg['text'])
+                entities = tell_entities(msg['text'])
+
                 #TODO: querying, look up for an answer
-
-            
-
-
-            
+        
         else:
             self.sender.sendMessage('To be implemented.')
         pass
