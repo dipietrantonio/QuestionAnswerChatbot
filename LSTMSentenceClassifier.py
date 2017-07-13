@@ -10,7 +10,7 @@ from keras.layers import Activation, Dense
 from keras.layers.recurrent import LSTM
 from MachineLearning.model_evaluation import ConfusionMatrix
 
-_word_vect = pickle.load(open('models/glove.bin', 'rb'))
+_word_vect = pickle.load(open('models/glove_min.bin', 'rb'))
 _vect_size = len(list(_word_vect.values())[0])
 
 def _word_lookup(word):
