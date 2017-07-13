@@ -76,25 +76,9 @@ class MarkovChain:
         else:
             threshold = self.node_max_freq * threshold
 
-        # lets start with the initial transitions
-        s_count = 0
-        s_total = 0
-        keys = list(self.start_state_prob.keys())
-        
-        for node in keys:
-            if self.start_state_prob[node] < threshold:
-                s_total += self.start_state_prob[node]
-                s_count += 1
-                del self.start_state_prob[node]
-        
-        # _*_ is a special value to address "any initial value"
-        self.start_state_prob["_*_"] = (s_total // s_count) if s_count > 0 else 0
-        self.node_frequencies["_*_"] = self.start_state_prob["_*_"]
-        # now lets proceed to replace with "*" all the unimportant words in the pattern
-        for node in self.start_state_prob.keys():
+        for node in list(self.start_state_prob.keys()):
             self._bfs_simplify(node, threshold)
-        
-        self._merge_stars(None)
+        self._merge_stars()
 
     
     def _iterate_path(path):
@@ -137,14 +121,15 @@ class MarkovChain:
             except KeyError:
                 pass
             star_name += nn
-
-        self.adj[star_name] = merged_neighbors
+        if len(merged_neighbors) > 0:
+            self.adj[star_name] = merged_neighbors
         #print("new node", star_name, merged_neighbors)
         self.node_frequencies[star_name] = self.node_max_freq #TODO CHECK THIS
         visited.add(star_name)
 
         # fix every node that points to a node in the path
         # redirect edges to a new node
+        initial = path[-1] in self.start_state_prob.keys()
         for node in list(self.adj.keys()):
             if node in lpath:
                 continue
@@ -152,11 +137,14 @@ class MarkovChain:
             total = 0
             for nn in lpath:
                 if nn in l:
+                    initial = False
                     total += self.adj[node][nn]
                     del self.adj[node][nn]
             if total > 0:
                 self.adj[node][star_name] = total
-        
+        if initial:
+            del self.start_state_prob[path[-1]]
+            self.start_state_prob[star_name] = 1
         # delete every node in path from adj dictionary, so that
         # they exist no more
         for nn in MarkovChain._iterate_path(path):
@@ -176,7 +164,7 @@ class MarkovChain:
             #print("dequeued", c)
             f = self.node_frequencies[c]
             newPath = list()
-            if len(path) > 0 and f >= nf_threshold:
+            if len(path) > 0 and f > nf_threshold:
                 # case when a relevant node is encountered a first time
                 #print("relevant new node encountered:", c, "path:", MarkovChain._print_path(path))
                 # create a new star node that has outgoing edges collected
@@ -185,7 +173,7 @@ class MarkovChain:
                 
                 #print("after relevant compression: ")
             
-            elif f < nf_threshold:
+            elif f <= nf_threshold:
                 # case when an irrelevant node is encountered a first time
                 newPath = [path, c]
                 #print("irrelevant node encountered first time", c)
@@ -214,9 +202,48 @@ class MarkovChain:
                         # initial node in path though.
                         self._compress_path(newPath, visited)
     
-    def _merge_stars(self, start_node):
+    def _merge_stars(self):
+        
+        #first, merge initial stars
+
+        self.adj["_*_"] = dict()
+        total_sprob = 0
+        listOfNodes = list(self.adj.keys())
+
+        initial_nodes = list(self.start_state_prob.keys())
+        star_initial_nodes = list()
+        for node in initial_nodes:
+            if node.startswith("_*_"):
+                star_initial_nodes.append(node)
+                try:
+                    for k in list(self.adj[node].keys()):
+                        if k in self.adj["_*_"].keys():
+                            self.adj["_*_"][k] += self.adj[node][k]
+                        else:
+                            self.adj["_*_"][k] = self.adj[node][k]
+                        del self.adj[node]
+                    total_sprob += self.start_state_prob[node]
+                    
+                except KeyError:
+                    pass
+                del self.start_state_prob[node]
+                
+        # redirect incoming edge in node to stars
+        for onode in listOfNodes:
+            for node in star_initial_nodes:
+                try:
+                    if node in self.adj[onode].keys():
+                        if '_*_' in list(self.adj[onode].keys()):
+                            self.adj[onode]['_*_'] += self.adj[onode][node]
+                        else:
+                            self.adj[onode]['_*_'] += self.adj[onode][node]
+                        del self.adj[onode][node]
+                except KeyError:
+                    pass
+            
         stars = 0
-        for c in self.adj.keys():
+            
+        for c in listOfNodes:
             
             neighbors = self.get_neighbors(c)
             
@@ -249,8 +276,6 @@ class MarkovChain:
                 
             if merged_star is not None:
                 self.adj[merged_star] = merged_neigh
-                queue.insert(0, merged_star)
-                visited.add(merged_star)
                 stars += 1
                 
     def add_sample(self, sentence):
@@ -261,13 +286,29 @@ class MarkovChain:
             self.add_occurrence(sentence[i-1], sentence[i])
             self.increment_node_frequency(sentence[i])
 
-ch = MarkovChain()
+    def train_model(self, X):
+        for x in X:
+            self.add_sample(x)
+        self.simplify()
+        self.normalize()
+    
+    def sample_probability(self, sample):
+        p = 0
+        try:
+            p = self.start_state_prob[sample[0]]
+        except KeyError:
+            p = self.start_state_prob["_*_"]
+        
+        if p == 0:
+            return 0
+        
+        for i in range(1, len(sample)):
+            pass
 
-ch.add_sample("Where th matteo is".split())
-ch.add_sample("Where c cristian is".split())
+m = MarkovChain()
 
-print(ch.node_max_freq)
+s = [ "x where is y".split(), "z where is f".split()]
 
-ch.simplify()
-print("----")
-print(ch)
+m.train_model(s)
+m = m.normalize()
+print(m)
