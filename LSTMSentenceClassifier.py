@@ -36,7 +36,7 @@ class LSTMSentenceClassifier:
 
 
         self.default_lstm_params = {
-            'lstm_units' : 120,
+            'lstm_units' : 20,
             'dropout' : 0.1,
             'rec_dropout' : 0.1,
             'batch_size' : 40,

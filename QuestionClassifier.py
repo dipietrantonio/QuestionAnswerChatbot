@@ -2,15 +2,13 @@
 This module is used to train and use a model that is able to predict the relation
 underlying a question pattern.
 """
-import LSTMSentenceClassifier as lstm
-from LSTMSentenceClassifier import LSTMSentenceClassifier
 import json
 from math import floor
 import os
+from MarkovChain import MarkovChain
 import pickle
 from random import randint
 from nltk import word_tokenize
-PATH_TO_GLOVE = "models/glove.bin"
 PATH_TO_KB = "full_kb.txt"
 
 def find_labels(jdata):
@@ -81,12 +79,8 @@ def train_question_to_relation():
     jdata = None
     if not os.path.isfile('tmp_training.bin'):
         jdata = pickle.load(open("test_data.bin", 'rb'))
-    labels = find_labels(jdata)
 
-    LSTMCL = lstm.LSTMSentenceClassifier()
-    LSTMCL.set_labels(labels)
-
-    if not(os.path.isfile("tmp_x_training.bin")):
+    if not(os.path.isfile("tmp_training_questions.bin")):
 
         if os.path.isfile('tmp_test.bin'):
             training = pickle.load(open('tmp_training.bin', 'rb'))
@@ -94,7 +88,7 @@ def train_question_to_relation():
             
         else:
             print("splitting dataset")
-            training, test = get_training_test_set(jdata, split=0.3)
+            training, test = get_training_test_set(jdata, split=0.2)
             pickle.dump(training, open('tmp_training.bin', 'wb'))
             pickle.dump(test, open("tmp_test.bin", 'wb'))
             del jdata
@@ -105,28 +99,43 @@ def train_question_to_relation():
         X_test, Y_test = preprocess_data(test)
         del test
 
-        X_training = LSTMCL.preprocess_input_sentences(X_training)
-        X_test = LSTMCL.preprocess_input_sentences(X_test)
-        Y_training = LSTMCL.preprocess_labels(Y_training)
-        Y_test = LSTMCL.preprocess_labels(Y_test)
+        # now we have to divide each question by category
+
+        training_questions = dict()
+
+        for i in range(len(Y_training)):
+            la = Y_training[i]
+            try:
+                training_questions[la] += [X_training[i]]
+            except KeyError:
+                training_questions[la] = [X_training[i]]
         
-        pickle.dump(X_training, open("tmp_x_training.bin", 'wb'))
-        pickle.dump(Y_training, open("tmp_y_training.bin", 'wb'))
-        pickle.dump(X_test, open("tmp_x_test.bin", 'wb'))
-        pickle.dump(Y_test, open("tmp_y_test.bin", 'wb'))
+        pickle.dump(training_questions, open("tmp_training_questions.bin", 'wb'))
+        del X_training
+        del Y_training
+
+        test_questions = dict()
+
+        for i in range(len(Y_test)):
+            la = Y_test[i]
+            try:
+                test_questions[la] += [X_test[i]]
+            except KeyError:
+                test_questions[la] = [X_test[i]]
+        
+        pickle.dump(test_questions, open("tmp_test_questions.bin", 'wb'))
+        del X_test
+        del Y_test
     else:
-        X_training = pickle.load(open("tmp_x_training.bin", 'rb'))
-        Y_training = pickle.load(open("tmp_y_training.bin", 'rb'))
-        X_test = pickle.load(open("tmp_x_test.bin", 'rb')) 
-        Y_test = pickle.load(open("tmp_y_test.bin", 'rb'))
-
+        training_questions = pickle.load(open("tmp_training_questions.bin", 'rb'))
+        test_questions = pickle.load(open("tmp_test_questions.bin", 'rb'))
+   
+    print("dataset preprocessed", "Start training")
     
-
-    print("dataset preprocessed")
-
-    LSTMCL.train_LSTM_model(X_training, Y_training)
-    cm = LSTMCL.test_model(X_test, Y_test)
-
-    print(cm.getAccuracy())
+    models = dict()
+    for k in training_questions.keys():
+        models[k] = MarkovChain()
+        print("training model for", k)
+        models[k].train_model(training_questions[k])
 
 train_question_to_relation()
