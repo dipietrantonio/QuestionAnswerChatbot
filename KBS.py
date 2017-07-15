@@ -53,11 +53,14 @@ def items_from(start_id, nItems=1000):
         params = {'id' : c_id, 'key' : key}
         resp = do_get('items_from', params)
         ld = len(json.loads(resp))
+        if ld == 0:
+            print("No more data")
+            exit(1)
         final_resp += resp[1:-1] + ","
         counter += ld
         c_id = c_id + ld
         print("{}/{}          ".format(counter, nItems), end='\r')
-        time.sleep(0.1)
+        time.sleep(0.2)
     
     return final_resp[:-1] + "]"
     #return json.loads(final_resp)

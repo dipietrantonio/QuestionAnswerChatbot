@@ -9,7 +9,9 @@ from MarkovChain import MarkovChain
 import pickle
 from random import randint
 from nltk import word_tokenize
+from MachineLearning.model_evaluation import ConfusionMatrix
 PATH_TO_KB = "full_kb.txt"
+
 
 def find_labels(jdata):
     
@@ -137,5 +139,27 @@ def train_question_to_relation():
         models[k] = MarkovChain()
         print("training model for", k)
         models[k].train_model(training_questions[k])
+        print(models[k])
+    
+    print("testing..")
+    y_true = list()
+    y_pred = list()
+    for k in test_questions.keys():
+        for q in test_questions[k]:
+            y_true.append(k)
+            max_ind = -1
+            max_value = -1
+            for m in models.keys():
+                r = models[m].sample_probability(q)
+                if r > max_value:
+                    max_value = r
+                    max_ind = m
+            y_pred.append(max_ind)
+    
+    a = ConfusionMatrix(y_true, y_pred)
+    from DataVisualization import heatmap
+    print(a.labelIndexes, a.labels_mapping)
+    print(a.getAccuracy())
+    heatmap(a.getPercentageMatrix())
 
 train_question_to_relation()

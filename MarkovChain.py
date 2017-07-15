@@ -1,4 +1,5 @@
 from math import exp
+
 class MarkovChain:
 
     def __init__(self):
@@ -263,15 +264,16 @@ class MarkovChain:
             self.add_edge(sentence[i-1], sentence[i])
             self.increment_node_frequency(sentence[i])
 
-    def train_model(self, X):
+    def train_model(self, X, threshold = 0.1):
         for x in X:
             self.add_sample(x)
         #print("Samples added. Number of nodes: {}".format(len(self.outgoing)))
-        self.simplify()
+        self.simplify(threshold)
         #print("Model simplified. Number of nodes: {}".format(len(self.outgoing)))
         self = self.normalize()
     
-    def sample_probability(self, sample):
+    def sample_probability(self, sample, penality=0.1):
+        #print(sample)
         p = 0
         try:
             p = self.start_state_prob[sample[0]]
@@ -283,31 +285,41 @@ class MarkovChain:
             return 0
         
         for i in range(1, len(sample)):
-            if sample[i] in self.outgoing[sample[i-1]].keys():
-                p *= self.outgoing[sample[i-1]][sample[i]] #both present
-            else:
-                found = False
-                for k in self.outgoing[sample[i-1]].keys():
-                    if k.startswith("_*_"): # admit a transition
-                        p *= self.outgoing[sample[i-1]][k]
-                        found = True
-                        sample[i] = k
+            try:
+                outg = self.outgoing[sample[i-1]]
+                try:
+                    p *= outg[sample[i]] #both present
+                except KeyError:
+                    found = False
+                    # lets see if there is a star node in neighbors
+                    for k in outg.keys():
+                        if k.startswith("_*_"): # admit a transition
+                            p *= outg[k] * penality
+                            found = True
+                            sample[i] = k
+                            break
+                    
+                    if not found:
+                        p = 0
                         break
-                if not found:
-                    # se if I can stay in previous node, if it is *
-                    if sample[i-1].startswith("_*_"):
-                        sample[i] = sample[i-1]
-                        stay_p = 0
-                        if i >= 2:
-                            stay_p = self.outgoing[sample[i-2]][sample[i-1]]
-                        else:
-                            stay_p = self.start_state_prob[sample[i-1]]
-                        # add the penality of stay in star
-                        balance = 0.0
-                        v2 = (1-balance)*(1/(1 + 0.1*self._star_path_len[sample[i-1]]))
-                        #print("part 2", v2)
-                        stay_p = balance*stay_p + v2
-                        p *= v2
+                        # # se if I can stay in previous node, if it is *
+                        # if sample[i-1].startswith("_*_"):
+                        #     sample[i] = sample[i-1]
+                        #     stay_p = 0
+                        #     if i >= 2:
+                        #         stay_p = self.outgoing[sample[i-2]][sample[i-1]]
+                        #     else:
+                        #         stay_p = self.start_state_prob[sample[i-1]]
+                        #     # add the penality of stay in star
+                        #     balance = 0.0
+                        #     v2 = (1-balance)*(1/(1 + 0.1*self._star_path_len[sample[i-1]]))
+                        #     #print("part 2", v2)
+                        #     stay_p = balance*stay_p + v2
+                        #     p *= v2
+            except KeyError:
+                p = 0
+        
+        print(p)
         return p
 
     def predict(self, X):
