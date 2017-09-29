@@ -1,0 +1,11 @@
+models/*
+.vscode/*
+BabelDomains_full/*
+chatbot_maps/*
+kbs.xml
+full_kb.txt
+sample.txt
+tmp/*
+local_data/*
+*.bin
+__pycache__/*

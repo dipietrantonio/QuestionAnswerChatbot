@@ -1,0 +1,116 @@
+Listening..
+subject selected Slatko::bn:00724577n relation: size
+Concept chosen from answer: sweet
+Sending data to server..
+[{'c2': 'sweet::bn:00111540a', 'c1': 'Slatko::bn:00724577n', 'HASH': -1995603948, 'domains': [''], 'answer': 'sweet', 'question': 'How is Slatko?', 'context': '', 'relation': 'SIZE'}]
+Local knowledge base updated.
+answering a question..
+[{"id":"bn:00016401n","pos":"NOUN","source":"BABELNET"},{"id":"bn:03830621n","pos":"NOUN","source":"BABELNET"},{"id":"bn:03260735n","pos":"NOUN","source":"BABELNET"},{"id":"bn:13755660v","pos":"VERB","source":"BABELNET"},{"id":"bn:00032102n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00032101n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00026658n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00032100n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00032099n","pos":"NOUN","source":"BABELNET"}]
+[{"id":"bn:00076928n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076927n","pos":"NOUN","source":"BABELNET"},{"id":"bn:03084958n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076926n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076925n","pos":"NOUN","source":"BABELNET"},{"id":"bn:13719017v","pos":"VERB","source":"BABELNET"},{"id":"bn:00076924n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076923n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076922n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076921n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00833373n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076920n","pos":"NOUN","source":"BABELNET"},{"id":"bn:01260156n","pos":"NOUN","source":"BABELNET"},{"id":"bn:03475529n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00001734n","pos":"NOUN","source":"BABELNET"},{"id":"bn:03630544n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00006125n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076919n","pos":"NOUN","source":"BABELNET"},{"id":"bn:00076918n","pos":"NOUN","source":"BABELNET"}]
+Relations predicted out of the question: ['SIZE', 'SPECIALIZATION', 'SHAPE']
+Entities extracted: [('dobj', {'start': 5, 'type': 'MCS', 'bab_id': 'bn:00016401n', 'mention': 'example', 'end': 6}), ('pobj', {'start': 9, 'type': 'MCS', 'bab_id': 'bn:00076928n', 'mention': 'thing', 'end': 10})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['PLACE', 'TIME', 'MATERIAL']
+Entities extracted: [('nsubj', {'start': 1, 'type': 'BABELFY', 'bab_id': 'bn:00015540n', 'mention': 'Paris', 'end': 2}), ('pobj', {'start': 4, 'type': 'BABELFY', 'bab_id': 'bn:00036202n', 'mention': 'France', 'end': 5})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['PLACE', 'HOW_TO_USE', 'MATERIAL']
+Entities extracted: [('nsubj', {'start': 2, 'type': 'BABELFY', 'bab_id': 'bn:00015540n', 'mention': 'Paris', 'end': 3})]
+Dataset entry chosen: {'c2': 'Mississippi Highway 9W::bn:03322838n', 'c1': 'Paris::bn:00015540n', 'HASH': -364399545, 'context': 'Paris is located at the junction of Mississippi Highway 9W and Mississippi Highway 315 east of Water Valley .', 'domains': ['Geography and places', 'Transport and travel'], 'relation': 'PLACE', 'question': 'Where is Paris located ?', 'answer': 'Mississippi Highway 9W'}
+answering a question..
+Relations predicted out of the question: ['PLACE', 'HOW_TO_USE', 'MATERIAL']
+Entities extracted: [('nsubj', {'start': 2, 'type': 'BABELFY', 'bab_id': 'bn:00013179n', 'mention': 'London', 'end': 3})]
+Dataset entry chosen: {'c2': 'Tech City::bn:02310216n', 'c1': 'London::bn:00013179n', 'HASH': -101972151, 'context': 'Campus London is located in Tech City and helps multiple start-ups to grow under the same roof , by mentoring them and giving them the chance to learn more through the events that run everyday .', 'domains': [], 'relation': 'PLACE', 'question': 'Where is London located ?', 'answer': 'Tech City'}
+answering a question..
+Relations predicted out of the question: ['GENERALIZATION', 'SPECIALIZATION', 'ACTIVITY']
+Entities extracted: [('nsubj', {'start': 1, 'type': 'MCS', 'bab_id': 'bn:00020731n', 'mention': 'colour', 'end': 2}), ('attr', {'start': 4, 'type': 'MCS', 'bab_id': 'bn:00072016n', 'mention': 'sky', 'end': 5})]
+Entities in the question were not found in the Knowledge Graph
+subject selected Venpakal::bn:02982553n relation: generalization
+answering a question..
+No entities in the question.
+answering a question..
+[{"id":"bn:02982553n","pos":"NOUN","source":"BABELNET"}]
+Relations predicted out of the question: ['PLACE', 'PART', 'TIME']
+Entities extracted: [('nsubj', {'start': 2, 'type': 'MCS', 'bab_id': 'bn:02982553n', 'mention': 'Venpakal', 'end': 3})]
+Dataset entry chosen: {'c2': 'Thiruvananthapuram district::bn:01700950n', 'c1': 'Venpakal::bn:02982553n', 'HASH': 1650651909, 'context': 'Venpakal is a village in Thiruvananthapuram district', 'domains': ['Geography and places'], 'relation': 'PLACE', 'question': 'Where is Venpakal?', 'answer': 'Thiruvananthapuram district'}
+subject selected Columbia Basin Irrigation Project::bn:03741294n relation: size
+answering a question..
+Relations predicted out of the question: ['TASTE', 'SOUND', 'SMELL']
+Entities extracted: [('compound', {'start': 2, 'type': 'BABELFY', 'bab_id': 'bn:00014609n', 'mention': 'cake', 'end': 3}), ('dobj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00042275n', 'mention': 'taste', 'end': 4})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['PLACE', 'HOW_TO_USE', 'PART']
+Entities extracted: [('nsubj', {'start': 2, 'type': 'MCS', 'bab_id': 'bn:00015556n', 'mention': 'Rome', 'end': 3})]
+Dataset entry chosen: {'c2': 'Vatican City::bn:00019318n', 'c1': 'Rome::bn:00015556n', 'HASH': -1321800458, 'context': 'Rome is in Vatican City', 'domains': ['Geography and places', 'Geography and places'], 'relation': 'PLACE', 'question': 'Where is Rome?', 'answer': 'Vatican City'}
+answering a question..
+Relations predicted out of the question: ['GENERALIZATION', 'SPECIALIZATION', 'PART']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00078798n', 'mention': 'type', 'end': 4}), ('pobj', {'start': 5, 'type': 'BABELFY', 'bab_id': 'bn:00004222n', 'mention': 'animal', 'end': 6})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['SPECIALIZATION', 'GENERALIZATION', 'ACTIVITY']
+Entities extracted: [('pobj', {'start': 6, 'type': 'BABELFY', 'bab_id': 'bn:00023236n', 'mention': 'country', 'end': 7})]
+Dataset entry chosen: {'c2': 'Libya::bn:00050980n', 'c1': 'country::bn:00023236n', 'HASH': -1188573447, 'context': 'Libya is a country located', 'domains': [], 'relation': 'SPECIALIZATION', 'question': 'What is an example of a country ?', 'answer': 'Libya'}
+answering a question..
+Relations predicted out of the question: ['PLACE', 'PURPOSE', 'TIME']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00010712n', 'mention': 'Pope', 'end': 4})]
+Entities in the question were not found in the Knowledge Graph
+subject selected Connor::bn:03679227n relation: purpose
+answering a question..
+Relations predicted out of the question: ['GENERALIZATION', 'SIZE', 'SPECIALIZATION']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00002180n', 'mention': 'aim', 'end': 4})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['GENERALIZATION', 'SIZE', 'SPECIALIZATION']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00002180n', 'mention': 'aim', 'end': 4})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['SPECIALIZATION', 'GENERALIZATION', 'ACTIVITY']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00016401n', 'mention': 'instance', 'end': 4}), ('pobj', {'start': 6, 'type': 'MCS', 'bab_id': 'bn:00032893n', 'mention': 'family', 'end': 7})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+No entities in the question.
+answering a question..
+Relations predicted out of the question: ['PART', 'HOW_TO_USE', 'PURPOSE']
+Entities extracted: [('compound', {'start': 2, 'type': 'BABELFY', 'bab_id': 'bn:02385098n', 'mention': 'Spanish Empire', 'end': 4})]
+Dataset entry chosen: {'c2': 'Paraguay::bn:00060558n', 'c1': 'Spanish Empire::bn:02385098n', 'HASH': -586926709, 'context': 'Paraguay was part of the Spanish Empire', 'domains': ['History', 'Geography and places'], 'relation': 'PART', 'question': 'What was a part of Spanish Empire?', 'answer': 'Paraguay'}
+answering a question..
+Relations predicted out of the question: ['TASTE', 'SOUND', 'SMELL']
+Entities extracted: [('compound', {'start': 2, 'type': 'BABELFY', 'bab_id': 'bn:00012873n', 'mention': 'bread', 'end': 3}), ('dobj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00042275n', 'mention': 'taste', 'end': 4})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['SPECIALIZATION', 'GENERALIZATION', 'PART']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:13638874a', 'mention': 'lemon', 'end': 4})]
+Entities in the question were not found in the Knowledge Graph
+subject selected Coteaux de Pierrevert::bn:00023046n relation: taste
+Concept chosen from answer: sweet
+Sending data to server..
+[{'c2': 'sweet::bn:00111540a', 'c1': 'Coteaux de Pierrevert::bn:00023046n', 'HASH': -78175264, 'domains': [''], 'answer': 'sweet', 'question': 'What flavour has Coteaux de Pierrevert?', 'context': '', 'relation': 'TASTE'}]
+Local knowledge base updated.
+answering a question..
+Relations predicted out of the question: ['PLACE', 'HOW_TO_USE', 'PART']
+Entities extracted: [('nsubj', {'start': 2, 'type': 'MCS', 'bab_id': 'bn:01477779n', 'mention': 'Porquerolles', 'end': 3})]
+Entities in the question were not found in the Knowledge Graph
+subject selected Numancia::bn:01320840n relation: similarity
+subject selected Nicuatole::bn:03757707n relation: size
+subject selected Sentier::bn:03287419n relation: color
+answering a question..
+Relations predicted out of the question: ['SIZE', 'HOW_TO_USE', 'SHAPE']
+Entities extracted: [('nsubj', {'start': 2, 'type': 'MCS', 'bab_id': 'bn:03287419n', 'mention': 'Sentier', 'end': 3})]
+Entities in the question were not found in the Knowledge Graph
+answering a question..
+Relations predicted out of the question: ['TIME', 'PLACE', 'MATERIAL']
+Entities extracted: [('compound', {'start': 2, 'type': 'MCS', 'bab_id': 'bn:00010712n', 'mention': 'Pope', 'end': 3}), ('nsubj', {'start': 3, 'type': 'MCS', 'bab_id': 'bn:00023556n', 'mention': 'shit', 'end': 4}), ('pobj', {'start': 6, 'type': 'MCS', 'bab_id': 'bn:00081492n', 'mention': 'woods', 'end': 7})]
+Entities in the question were not found in the Knowledge Graph
+Concept chosen from answer: capital of Italy
+Sending data to server..
+[{'c2': 'capital of Italy::bn:00015556n', 'c1': 'Nicuatole::bn:03757707n', 'HASH': -1430137685, 'domains': [''], 'answer': "What's the capital of Italy?", 'question': 'How is Nicuatole?', 'context': '', 'relation': 'SIZE'}]
+Local knowledge base updated.
+answering a question..
+Relations predicted out of the question: ['GENERALIZATION', 'SPECIALIZATION', 'ACTIVITY']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'BABELFY', 'bab_id': 'bn:00015556n', 'mention': 'capital of Italy', 'end': 6})]
+Dataset entry chosen: {'c2': 'capital of Italy::bn:00015556n', 'c1': 'Rome::bn:00015556n', 'HASH': -558363642, 'context': 'Rome is the capital of Italy and also of the Province of Rome and of the region of Lazio .', 'domains': ['Geography and places', 'Geography and places'], 'relation': 'GENERALIZATION', 'question': 'Is Rome a capital of Italy?', 'answer': 'yes'}
+answering a question..
+Relations predicted out of the question: ['GENERALIZATION', 'SPECIALIZATION', 'ACTIVITY']
+Entities extracted: [('nsubj', {'start': 3, 'type': 'BABELFY', 'bab_id': 'bn:00010046n', 'mention': 'capital of Switzerland', 'end': 6})]
+Entities in the question were not found in the Knowledge Graph

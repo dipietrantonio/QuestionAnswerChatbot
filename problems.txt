@@ -1,0 +1,20 @@
+The following entries contain questions the bot had problems answering to because of mismatches with data coming from babelfy.
+
+The following entry is correctly retrieved
+{'question': 'Can Skaland be found in Senja ?', 'answer': 'Yes', 'relation': 'PLACE', 'c2': 'Senja::bn:00316653n', 'context': 'Skaland is located on the shores of the Bergsfjorden on the northwest side of the island of Senja , about to the southwest of the village of Senjahopen and about southwest of the city of Tromsø .', 'domains': ['Geography and places', 'Geography and places'], 'HASH': 1865034038, 'c1': 'Skaland::bn:03159828n'}
+
+Babelfy does not recognize Redrock Lake as compound
+{'question': 'Where is Redrock Lake located ?', 'answer': 'Montana', 'relation': 'PLACE', 'c2': 'Montana::bn:00055782n', 'context': 'Redrock Lake is located in Glacier National Park , in the U. S. state of Montana .', 'domains': ['Geography and places', 'Geography and places'], 'HASH': -1199885062, 'c1': 'Redrock Lake::bn:02413258n'}
+
+Here the babelnet id returned from District is different from the one listed here(!)
+{'question': 'Is District an example of districts?', 'answer': 'yes', 'relation': 'GENERALIZATION', 'c2': 'districts::bn:00027810n', 'context': "District is one of the two districts that divide Yangzhou 's main urban area .", 'domains': ['Geography and places', 'Geography and places'], 'HASH': -1444832784, 'c1': 'District::bn:00027810n'}
+
+Again, Here the babelnet id of Eden returned from District is different from the one listed here(!)
+{'question': 'Is Eden placed in San Angelo ?', 'answer': 'Yes', 'relation': 'PLACE', 'c2': 'San Angelo::bn:00569750n', 'context': 'Eden is located at the intersection of U.S. Highway 83 , which extends north to Abilene and south to Junction , and U.S. Highway 87 , a link from San Angelo to the northwest and San Antonio to the southeast .', 'domains': ['Religion, mysticism and mythology', 'Education'], 'HASH': -2035288714, 'c1': 'Eden::bn:00029734n'}
+
+This works
+{'question': 'Is High Abbotside an example of civil parish?', 'answer': 'yes', 'relation': 'GENERALIZATION', 'c2': 'civil parish::bn:03489002n', 'context': 'High Abbotside is a civil parish in the Richmondshire district of North Yorkshire , England .', 'domains': [], 'HASH': 2102195004, 'c1': 'High Abbotside::bn:01594458n'}
+
+Here Did is identified as entity..
+{'question': 'Did Pays de Bitche include Oka River?', 'answer': 'no', 'relation': 'PART', 'c2': 'bn:16139326n', 'context': 'In the 9th century , the Oka River was part of the Volga trade route , and the upper Volga watershed became an area of contact between the indigenous Uralic peoples such as the Merya and the expanding Volga Bulgars ( particularly the second son of Khan Kubrat who expanded the borders of the Old Great Bulgaria ) , Germanic ( Varangians ) and Slavic peoples . ', 'domains': ['Geography and places'], 'HASH': -1056377931, 'c1': 'bn:03091997n'}
+
